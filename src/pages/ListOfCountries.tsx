@@ -9,21 +9,15 @@ import {
 import Search from '../components/search'
 import { useEffect, useState } from 'react'
 import useSearchStore from '../store/search'
+import { esimProvider } from '../store/types'
 
-interface data {
-	id: number
-	name: string
-	search: string
-	price: string
-	flag: string
-}
 const ListOfCountries = () => {
-	const [data, setData] = useState<data[]>([])
+	const [data, setData] = useState<esimProvider[]>([])
 	const { search } = useSearchStore()
 
 	useEffect(() => {
 		axios
-			.get('https://65a02bdf7310aa1f8144b77c.mockapi.io/api')
+			.get('https://66f4456877b5e8897098fcda.mockapi.io/api')
 			.then(res => setData(res.data))
 			.catch(err => console.log(err))
 	}, [])
@@ -41,7 +35,7 @@ const ListOfCountries = () => {
 								<CardTitle className='flex justify-between items-center'>
 									<div className='flex items-center'>
 										<div className='mr-2 text-4xl'>{item.flag}</div>
-										<div className='text-sm'>{item.name}</div>
+										<div className='text-sm'>{item.country}</div>
 									</div>
 									<Button>
 										<Link to={`/${item.id}`}>Купить</Link>
