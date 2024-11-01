@@ -10,8 +10,12 @@ import Layout from './pages/Layout'
 import CountryPage from './pages/CountryPage'
 import Pay from './pages/Pay'
 import { Toaster } from './components/ui/toaster'
+import { useEffect } from 'react'
+import { useTelegram } from './hooks/useTelegram'
 
 const App = () => {
+	const { tg } = useTelegram()
+
 	const router = createBrowserRouter(
 		createRoutesFromElements(
 			<Route path='/' element={<Layout />}>
@@ -20,7 +24,10 @@ const App = () => {
 				<Route path='/:id/pay' element={<Pay />} />
 			</Route>
 		)
-	)
+	)	
+	useEffect(() => {
+		tg.ready()
+	}, [])
 	return (
 		<ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
 			<RouterProvider router={router} />

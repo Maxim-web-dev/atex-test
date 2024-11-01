@@ -24,7 +24,6 @@ const ListOfCountries = () => {
 
 	return (
 		<div className='w-full flex flex-col justify-center items-center gap-5'>
-			<h1 className='text-3xl'>Atex</h1>
 			<Search />
 			<div className='w-full flex flex-col items-center gap-3'>
 				{data
