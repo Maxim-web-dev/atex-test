@@ -27,6 +27,10 @@ const App = () => {
 	)	
 	useEffect(() => {
 		tg.ready()
+		tg.expand()
+		tg.BackButton.onClick = () => {
+			window.location.href = 'https://atex-test.vercel.app/'
+		}
 	}, [])
 	return (
 		<ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>

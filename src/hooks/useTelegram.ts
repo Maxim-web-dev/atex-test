@@ -1,7 +1,9 @@
 export const useTelegram = () => {
 	// @ts-ignore
 	const tg = window.Telegram.WebApp
-	tg.BackButton.onClick = () => window.history.back()
+	tg.BackButton.onClick = () => {
+		window.location.href = 'https://atex-test.vercel.app/'
+	}
 	return {
 		tg,
 		ready: () => tg.ready(),
