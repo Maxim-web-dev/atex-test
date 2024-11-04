@@ -4,6 +4,7 @@ import {
 	RouterProvider,
 	createBrowserRouter,
 	createRoutesFromElements,
+	useNavigate,
 } from 'react-router-dom'
 import ListOfCountries from './pages/ListOfCountries'
 import { ThemeProvider } from './components/theme-provider'
@@ -29,9 +30,6 @@ const App = () => {
 	useEffect(() => {
 		tg.ready()
 		tg.expand()
-		tg.BackButton.onClick = () => {
-			return <Navigate to='/' replace />
-		}
 	}, [])
 	return (
 		<ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>

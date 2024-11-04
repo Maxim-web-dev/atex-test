@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../components/ui/button'
 import {
 	Card,
@@ -13,12 +13,19 @@ import { esimProvider } from '../store/types'
 import { useTelegram } from '../hooks/useTelegram'
 
 const CountryPage = () => {
-	const { BackButton } = useTelegram()
+	const { tg, BackButton } = useTelegram()
+	const navigate = useNavigate()
 	const [data, setData] = useState<esimProvider>()
 	const { id } = useParams()
 
 	useEffect(() => {
 		BackButton.show()
+		
+		tg.onEvent('backButtonClicked', () => {
+      tg.BackButton.hide(); 
+      window.history.back(); 
+			navigate('/');
+    });
 
 		if (id) {
 			axios
@@ -26,6 +33,11 @@ const CountryPage = () => {
 				.then(res => setData(res.data))
 				.catch(err => console.log(err))
 		}
+
+		return () => {
+      tg.BackButton.hide();
+      tg.offEvent('backButtonClicked'); // Removes the event listener
+    };
 	}, [])
 	
 	return (
