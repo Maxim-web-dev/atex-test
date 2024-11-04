@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 export const useTelegram = () => {
 	// @ts-ignore
 	const tg = window.Telegram.WebApp
@@ -10,6 +12,10 @@ export const useTelegram = () => {
 		BackButton: {
 			show: () => tg.BackButton.show(),
 			hide: () => tg.BackButton.hide(),
+			onClick: () => {
+				const navigate = useNavigate()
+				navigate('/')
+			},
 		},
 	}
 }
