@@ -33,7 +33,7 @@ const ListOfCountries = () => {
 							<CardHeader className='p-4'>
 								<CardTitle className='flex justify-between items-center'>
 									<div className='flex items-center'>
-										<div className='mr-2 text-4xl'>{item.flag}</div>
+										<div className='mr-2 text-4xl'><img src={item.flag} className='w-6'/></div>
 										<div className='text-sm'>{item.country}</div>
 									</div>
 									<Button>

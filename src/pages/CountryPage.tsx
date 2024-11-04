@@ -32,8 +32,9 @@ const CountryPage = () => {
 		<div className='w-full flex flex-col justify-center'>
 			<div className="w-350px">
 				<div className="flex flex-col space-y-1.5 p-6">
-					<div className="text-2xl font-semibold leading-none tracking-tight">
-						{data?.flag} {` ${data?.country}`}
+					<div className="flex gap-3 items-center text-2xl font-semibold leading-none tracking-tight">
+						<img src={data?.flag} className='w-8'/> 
+						{`${data?.country}`}
 					</div>
 					<div className="text-sm text-muted-foreground">
 						Выберите оператора
