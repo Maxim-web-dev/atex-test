@@ -1,9 +1,9 @@
 import {
+	Navigate,
 	Route,
 	RouterProvider,
 	createBrowserRouter,
 	createRoutesFromElements,
-	useNavigate,
 } from 'react-router-dom'
 import ListOfCountries from './pages/ListOfCountries'
 import { ThemeProvider } from './components/theme-provider'
@@ -16,7 +16,6 @@ import { useTelegram } from './hooks/useTelegram'
 
 const App = () => {
 	const { tg } = useTelegram()
-	const navigate = useNavigate()
 
 	const router = createBrowserRouter(
 		createRoutesFromElements(
@@ -31,12 +30,8 @@ const App = () => {
 		tg.ready()
 		tg.expand()
 		tg.BackButton.onClick = () => {
-			window.location.href = 'https://atex-test.vercel.app/'
-			navigate('/')
+			return <Navigate to='/' replace />
 		}
-		tg.WebApp.onEvent('backButtonClicked', () => {
-			navigate('/')
-		})
 	}, [])
 	return (
 		<ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
