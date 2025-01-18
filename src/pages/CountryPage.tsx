@@ -20,7 +20,7 @@ const CountryPage = () => {
 
 	useEffect(() => {
 		BackButton.show()
-		
+
 		tg.onEvent('backButtonClicked', () => {
       tg.BackButton.hide(); 
       window.history.back(); 
