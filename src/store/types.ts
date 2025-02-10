@@ -6,7 +6,14 @@ export interface esimProvider {
 	flag: string
 }
 export interface operator {
-	name: string
+	operator: string
 	url: string
 	logo: string
+	tarifs: tarif[]
+}
+export interface tarif {
+	price: string
+	internet: string
+	call: string
+	sms: string
 }

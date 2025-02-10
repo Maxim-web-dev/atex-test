@@ -28,7 +28,10 @@ const CountryPage = () => {
 		if (id) {
 			axios
 				.get(`https://66f4456877b5e8897098fcda.mockapi.io/api/${id}`) // Выполняем GET-запрос
-				.then(res => setData(res.data)) // Устанавливаем полученные данные в состояние
+				.then(res => {
+					setData(res.data)
+					console.log(res.data)
+				}) // Устанавливаем полученные данные в состояние
 				.catch(err => console.log(err)) // Обрабатываем ошибку, если запрос не удался
 		}
 
@@ -55,21 +58,43 @@ const CountryPage = () => {
 				</div>
 				<div className='flex flex-col gap-4'>
 					{/* Отображаем список операторов */}
-					{data?.operators.map(operator => (
-						<Card>
-							<CardHeader>
-								<CardTitle className='flex'>
-									<img src={operator.logo} alt='' className='w-10 h-10' />{' '}
-									{/* Логотип оператора */}
-									{operator.name} {/* Название оператора */}
-								</CardTitle>
-							</CardHeader>
-							<CardFooter>
-								<Button>
-									<a href={operator.url}>Купить</a>
-								</Button>{' '}
-								{/* Кнопка для перехода на страницу покупки */}
-							</CardFooter>
+					{data?.operators.map((operator, operatorId) => (
+						<Card className='flex' key={operatorId}>
+							<div className=''>
+								<CardHeader>
+									<CardTitle className='flex'>
+										<img
+											src={operator.logo}
+											alt=''
+											className='w-10 h-10 flex justify-center items-center'
+										/>{' '}
+										{/* Логотип оператора */}
+										{operator.operator} {/* Название оператора */}
+									</CardTitle>
+								</CardHeader>
+								<CardFooter>
+									<Button>
+										<a href={operator.url}>Купить</a>
+									</Button>{' '}
+									{/* Кнопка для перехода на страницу покупки */}
+								</CardFooter>
+							</div>
+							<div className='m-6'>
+								<p className='text-muted-foreground'>Тарифы:</p>
+								<div className='flex flex-col justify-start'>
+									{data?.operators[operatorId]?.tarifs?.map((_, id) => (
+										<div className='flex items-center gap-1' key={id}>
+											<span className='flex h-1 w-1  rounded-full bg-sky-500' />
+											<p className='text-xs my-1'>
+												{data?.operators[operatorId]?.tarifs[id]?.internet} /{' '}
+												{data?.operators[operatorId]?.tarifs[id]?.call} /{' '}
+												{data?.operators[operatorId]?.tarifs[id]?.sms} sms /{' '}
+												{data?.operators[operatorId]?.tarifs[id]?.price}
+											</p>
+										</div>
+									))}
+								</div>
+							</div>
 						</Card>
 					))}
 				</div>
